@@ -63,5 +63,16 @@ public class hotelReservation {
 		
 	}
 
+	public Hotel findBestRatedHotel(String startDate, String endDate, List<Hotel> hotels) throws ParseException {
+		Date start = sdf.parse(startDate);
+		Date end = sdf.parse(endDate);
+		Hotel h1 = hotels.stream()
+				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
+				.max(Comparator.comparingInt(Hotel::getRating))
+				.get()
+				;
+		return h1;
+	}
+
 	
 }

@@ -79,4 +79,16 @@ public class hotelReservationTest {
 		//System.out.println( h.getHotelName() + ", Rating: "+ h.getRating());
 		Assert.assertNotEquals("Bridgewood, Rating: 3", h.getHotelName() + ", Rating: "+ h.getRating() );
 	}
+	
+	
+	@Test
+	public void givenDates_whenBestRated_shouldReturnTrue() throws ParseException {
+		Hotel h = hotelReserve.findBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		Assert.assertEquals("Ridgewood, Rating: 5", h.getHotelName() + ", Rating: "+ h.getRating() );
+	}
+	@Test
+	public void givenDates_whenNotBestRated_shouldReturnFalse() throws ParseException {
+		Hotel h = hotelReserve.findBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		Assert.assertNotEquals("Bridgewood, Rating: 4", h.getHotelName() + ", Rating: "+ h.getRating() );
+	}
 }
