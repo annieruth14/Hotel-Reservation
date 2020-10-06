@@ -3,6 +3,7 @@ package com.bridgelabz.test.hotelreservation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,27 @@ public class hotelReservation {
 				;				
 		 
 		 return h;
+	}
+
+	public Hotel findCheapestHotelInWeekday(String startDate, String endDate, List<Hotel> hotels)  throws ParseException{
+		Date start = sdf.parse(startDate);
+		Date end = sdf.parse(endDate);
+		Hotel h1 = hotels.stream()
+				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
+				.min(Comparator.comparingInt(Hotel::getWeekdayRate))
+				.get()
+				;
+		return h1;
+	}
+	public Hotel findCheapestHotelInWeekend(String startDate, String endDate, List<Hotel> hotels)  throws ParseException{
+		Date start = sdf.parse(startDate);
+		Date end = sdf.parse(endDate);
+		Hotel h1 = hotels.stream()
+				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
+				.min(Comparator.comparingInt(Hotel::getWeekendRate))
+				.get()
+				;
+		return h1;
 	}
 
 	
