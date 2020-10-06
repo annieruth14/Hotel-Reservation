@@ -13,14 +13,15 @@ public class Hotel {
 	public int weekdayRate;
 	public int weekendRate;
 	public String customerType;
-	
+	public int rating;
 	SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
 	
-	public Hotel(String hotelName, String customerType, int weekdayRate , int weekendRate , String startDate, String endDate) {
+	public Hotel(String hotelName, String customerType, int weekdayRate , int weekendRate , String startDate, String endDate, int rating) {
 		this.hotelName=hotelName;
 		this.weekendRate = weekendRate;
 		this.weekdayRate = weekdayRate;
 		this.customerType= customerType;
+		this.rating=rating;
 		try {
 			this.startDate= sdf.parse(startDate);
 			this.endDate=sdf.parse(endDate);

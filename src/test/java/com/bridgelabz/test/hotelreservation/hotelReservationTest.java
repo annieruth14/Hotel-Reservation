@@ -19,12 +19,12 @@ public class hotelReservationTest {
 	
 	@Before
 	public void initialize() {
-		hotelList.add(new Hotel("Lakewood","Regular",220,400,"08Sep2020" , "14Sep2020" ));
-		hotelList.add(new Hotel("Lakewood","Regular",200,300,"08Sep2020" , "14Sep2020" ));
-		hotelList.add(new Hotel("Lakewood","Regular",310,290,"20Aug2020" , "30Aug2020" ));
-		hotelList.add(new Hotel("Bridgewood","Regular",350,50, "09Sep2020" , "14Sep2020" ));
-		hotelList.add(new Hotel("Bridgewood","Regular",350,200, "11Jun2020" , "14Jun2020" ));
-		hotelList.add(new Hotel("Ridgewood","Regular",190,260, "06Sep2020" , "12Sep2020" ));
+		hotelList.add(new Hotel("Lakewood","Regular",220,400,"08Sep2020" , "14Sep2020",3 ));
+		hotelList.add(new Hotel("Lakewood","Regular",200,300,"08Sep2020" , "14Sep2020" ,3));
+		hotelList.add(new Hotel("Lakewood","Regular",310,290,"20Aug2020" , "30Aug2020" ,3));
+		hotelList.add(new Hotel("Bridgewood","Regular",350,50, "09Sep2020" , "14Sep2020" ,4));
+		hotelList.add(new Hotel("Bridgewood","Regular",350,200, "11Jun2020" , "14Jun2020" ,4));
+		hotelList.add(new Hotel("Ridgewood","Regular",190,260, "06Sep2020" , "12Sep2020" ,5));
 		
 	}
 	@Test
