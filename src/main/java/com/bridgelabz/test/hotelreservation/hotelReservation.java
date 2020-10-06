@@ -51,17 +51,16 @@ public class hotelReservation {
 		return h1;
 	}
 
-	public Hotel findCheapestAndBestRatedHotel(String startDate, String endDate, List<Hotel> hotels)   throws ParseException{
-		Date start = sdf.parse(startDate);
-		Date end = sdf.parse(endDate);
-
-		Hotel h1 = hotels.stream()
-				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
-				.max(Comparator.comparingInt(Hotel::getRating))
-				.get()
-				;
-				
-		return h1;
+	public Hotel findCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels)   throws ParseException{
+		Hotel h1 = findCheapestHotelInWeekday(startDate,endDate,hotels);
+		Hotel h2 = findCheapestHotelInWeekend(startDate,endDate,hotels);
+		int min = h1.getWeekdayRate();
+		
+		if(h2.getWeekdayRate() > min  && h2.getWeekendRate() > min ) 
+			return h1;
+		else 
+			return h2;
+		
 	}
 
 	

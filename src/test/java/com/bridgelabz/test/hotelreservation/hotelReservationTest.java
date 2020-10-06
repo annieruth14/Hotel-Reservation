@@ -70,13 +70,13 @@ public class hotelReservationTest {
 	
 	@Test
 	public void givenDates_whenCheapestAndBestRated_shouldReturnTrue() throws ParseException {
-		Hotel h = hotelReserve.findCheapestAndBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
-		//System.out.println(h.getHotelName() + ", Total Rates: "+ h.getWeekendRate() );
-		Assert.assertNotEquals("Bridgewood, Total Rates: 200", h.getHotelName() + ", Total Rates: "+ h.getWeekendRate() );
+		Hotel h = hotelReserve.findCheapestBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		Assert.assertEquals("Bridgewood, Rating: 4", h.getHotelName() + ", Rating: "+ h.getRating() );
 	}
 	@Test
 	public void givenDates_whenNotCheapestAndBestRated_shouldReturnFalse() throws ParseException {
-		Hotel h = hotelReserve.findCheapestAndBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
-		Assert.assertNotEquals("Bridgewood, Total Rates: 200", h.getHotelName() + ", Total Rates: "+ h.getWeekendRate() );
+		Hotel h = hotelReserve.findCheapestBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		//System.out.println( h.getHotelName() + ", Rating: "+ h.getRating());
+		Assert.assertNotEquals("Bridgewood, Rating: 3", h.getHotelName() + ", Rating: "+ h.getRating() );
 	}
 }
