@@ -19,9 +19,9 @@ public class hotelReservationTest {
 	
 	@Before
 	public void initialize() {
-		hotelList.add(new Hotel("Lakewood","Regular",220,"08Sep2020" , "14Sep2020" ));
-		hotelList.add(new Hotel("Bridgewood","Regular",160, "11Jun2020" , "14Jun2020" ));
-		hotelList.add(new Hotel("Ridgewood","Regular",320, "20Aug2020" , "30Aug2020" ));
+		hotelList.add(new Hotel("Lakewood","Regular",110,90,"20Aug2020" , "30Aug2020" ));
+		hotelList.add(new Hotel("Bridgewood","Regular",150,50, "11Jun2020" , "14Jun2020" ));
+		hotelList.add(new Hotel("Ridgewood","Regular",220,150, "08Sep2020" , "14Sep2020" ));
 		
 	}
 	@Test
@@ -31,13 +31,14 @@ public class hotelReservationTest {
 	
 	@Test
 	public void givenDates_whenInRange_shouldReturnTrue() throws ParseException {
-		String result = hotelReserve.findCheapestHotel("10Sep2020" , "11Sep2020" , hotelList);
-		System.out.println(result);
-		Assert.assertEquals("Lakewood, Total Rates: 220", result );
+		Hotel h = hotelReserve.findCheapestHotel("10Sep2020" , "11Sep2020" , hotelList);
+		System.out.println(h.getHotelName() + ", Total Rates: "+ h.getWeekdayRate());
+		Assert.assertEquals("Ridgewood, Total Rates: 220", h.getHotelName() + ", Total Rates: "+ h.getWeekdayRate() );
 	}
 	@Test
 	public void givenDates_whenNotInRange_shouldReturnFalse() throws ParseException {
-		String result = hotelReserve.findCheapestHotel("10Sep2020" , "11Sep2020" , hotelList);
-		Assert.assertNotEquals("Bridgewood, Total Rates: 320", result );
+		Hotel h = hotelReserve.findCheapestHotel("10Sep2020" , "11Sep2020" , hotelList);
+		System.out.println(h.getHotelName() + ", Total Rates: "+ h.getWeekdayRate() );
+		Assert.assertNotEquals("Bridgewood, Total Rates: 320", h.getHotelName() + ", Total Rates: "+ h.getWeekdayRate() );
 	}
 }

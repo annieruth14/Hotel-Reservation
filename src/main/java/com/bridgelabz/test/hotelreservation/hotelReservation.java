@@ -15,19 +15,19 @@ public class hotelReservation {
 		System.out.println("Welcome to Hotel Reservation Program");
 	}
 
-	public String findCheapestHotel(String startDate, String endDate , List<Hotel> hotels) throws ParseException {
+	public Hotel findCheapestHotel(String startDate, String endDate , List<Hotel> hotels) throws ParseException {
 		
 		Date start = sdf.parse(startDate);
 		Date end = sdf.parse(endDate);
 		
-		String h = hotels.stream()
+		Hotel h = hotels.stream()
 				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
-				.map(x -> x.getHotelName() + ", Total Rates: " + x.getRate())
-				.findFirst()
-				.orElse(null)
+				.findAny()
+				.get()
 				;				
 		 
 		 return h;
 	}
+
 	
 }

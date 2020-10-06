@@ -10,14 +10,16 @@ public class Hotel {
 	public Date endDate;
 	
 	public String hotelName;
-	public int rate;
+	public int weekdayRate;
+	public int weekendRate;
 	public String customerType;
-	public String date1;
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
 	
-	public Hotel(String hotelName, String customerType, int rate, String startDate, String endDate) {
+	public Hotel(String hotelName, String customerType, int weekdayRate , int weekendRate , String startDate, String endDate) {
 		this.hotelName=hotelName;
-		this.rate=rate;
+		this.weekendRate = weekendRate;
+		this.weekdayRate = weekdayRate;
 		this.customerType= customerType;
 		try {
 			this.startDate= sdf.parse(startDate);
@@ -26,6 +28,22 @@ public class Hotel {
 			System.out.println("Exception found ");
 		}
 		
+	}
+
+	public int getWeekdayRate() {
+		return weekdayRate;
+	}
+
+	public void setWeekdayRate(int weekdayRate) {
+		this.weekdayRate = weekdayRate;
+	}
+
+	public int getWeekendRate() {
+		return weekendRate;
+	}
+
+	public void setWeekendRate(int weekendRate) {
+		this.weekendRate = weekendRate;
 	}
 
 	public Date getStartDate() {
@@ -49,11 +67,4 @@ public class Hotel {
 	public void setHotelName(String hotelName) {
 		this.hotelName = hotelName;
 	}
-	public int getRate() {
-		return rate;
-	}
-	public void setRate(int rate) {
-		this.rate = rate;
-	}
-	
 }
