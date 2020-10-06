@@ -54,12 +54,10 @@ public class hotelReservation {
 	public Hotel findCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels)   throws ParseException{
 		Hotel h1 = findCheapestHotelInWeekday(startDate,endDate,hotels);
 		Hotel h2 = findCheapestHotelInWeekend(startDate,endDate,hotels);
-		int min = h1.getWeekdayRate();
-		
-		if(h2.getWeekdayRate() > min  && h2.getWeekendRate() > min ) 
-			return h1;
-		else 
+		if(h1.getWeekdayRate() > h2.getWeekendRate()) 
 			return h2;
+		else 
+			return h1;
 		
 	}
 
@@ -74,5 +72,6 @@ public class hotelReservation {
 		return h1;
 	}
 
+	
 	
 }

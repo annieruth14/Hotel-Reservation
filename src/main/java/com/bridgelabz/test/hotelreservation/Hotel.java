@@ -31,6 +31,14 @@ public class Hotel {
 		
 	}
 
+	public String getCustomerType() {
+		return customerType;
+	}
+
+	public SimpleDateFormat getSdf() {
+		return sdf;
+	}
+
 	public int getRating() {
 		return rating;
 	}
