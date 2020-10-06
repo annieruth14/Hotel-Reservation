@@ -72,6 +72,15 @@ public class hotelReservation {
 		return h1;
 	}
 
-	
+	public Hotel findRewardCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels) throws ParseException{
+		List<Hotel> list = hotels.stream()
+				.filter(n -> n.getCustomerType().equals("Reward"))
+				.collect(Collectors.toList())
+				;
+		Hotel h1 = findCheapestBestRatedHotel(startDate , endDate , list);
+
+		return h1;
+	}
+
 	
 }

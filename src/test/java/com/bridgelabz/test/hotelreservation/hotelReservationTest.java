@@ -96,6 +96,17 @@ public class hotelReservationTest {
 		Assert.assertNotEquals("Bridgewood, Rating: 4", h.getHotelName() + ", Rating: "+ h.getRating() );
 	}
 	
+	@Test
+	public void givenDates_whenRewardAndCheapestBestRated_shouldReturnTrue() throws ParseException {
+		Hotel h = hotelReserve.findRewardCheapestBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		Assert.assertEquals("Ridgewood, Rating: 5, Rate: 90", h.getHotelName() + ", Rating: "+ h.getRating()+", Rate: "+h.getWeekdayRate() );
+	}
 	
+	@Test
+	public void givenDates_whenNotRewardAndCheapestBestRated_shouldReturnFalse() throws ParseException {
+		Hotel h = hotelReserve.findRewardCheapestBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		Assert.assertNotEquals("Ridgewood, Rating: 5, Rate: 100", h.getHotelName() + ", Rating: "+ h.getRating()+", Rate: "+h.getWeekdayRate() );
+		
+	}
 	
 }
