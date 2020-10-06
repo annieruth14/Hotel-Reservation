@@ -25,6 +25,10 @@ public class hotelReservationTest {
 		hotelList.add(new Hotel("Bridgewood","Regular",350,50, "09Sep2020" , "14Sep2020" ,4));
 		hotelList.add(new Hotel("Bridgewood","Regular",350,200, "11Jun2020" , "14Jun2020" ,4));
 		hotelList.add(new Hotel("Ridgewood","Regular",190,260, "06Sep2020" , "12Sep2020" ,5));
+		hotelList.add(new Hotel("Ridgewood","Regular",400,200, "06Dec2020" , "12Dec2020" ,5));
+		hotelList.add(new Hotel("Ridgewood","Regular",400,300, "08Dec2020" , "10Dec2020" ,5));
+		hotelList.add(new Hotel("Bridgewood","Regular",150,300, "06Dec2020" , "10Dec2020" ,4));
+		hotelList.add(new Hotel("Lakewood","Regular",300,500,"08Dec2020" , "14Dec2020" ,3));
 		
 	}
 	@Test
@@ -60,5 +64,19 @@ public class hotelReservationTest {
 		Hotel h2 = hotelReserve.findCheapestHotelInWeekend("11Sep2020" , "12Sep2020" , hotelList);
 		Assert.assertNotEquals("Ridgewood, Total Rate: 200", h1.getHotelName() + ", Total Rate: "+ h1.getWeekdayRate() );
 		Assert.assertNotEquals("Bridgewood, Total Rate: 200", h2.getHotelName() + ", Total Rate: "+ h2.getWeekendRate() );
-	}	
+	}
+	
+	
+	
+	@Test
+	public void givenDates_whenCheapestAndBestRated_shouldReturnTrue() throws ParseException {
+		Hotel h = hotelReserve.findCheapestAndBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		//System.out.println(h.getHotelName() + ", Total Rates: "+ h.getWeekendRate() );
+		Assert.assertNotEquals("Bridgewood, Total Rates: 200", h.getHotelName() + ", Total Rates: "+ h.getWeekendRate() );
+	}
+	@Test
+	public void givenDates_whenNotCheapestAndBestRated_shouldReturnFalse() throws ParseException {
+		Hotel h = hotelReserve.findCheapestAndBestRatedHotel("08Dec2020" , "09Dec2020" , hotelList);
+		Assert.assertNotEquals("Bridgewood, Total Rates: 200", h.getHotelName() + ", Total Rates: "+ h.getWeekendRate() );
+	}
 }
