@@ -10,77 +10,61 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class hotelReservation {
+	// Initializing date format
 	SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
 
+	// Printing welcome message
 	public void welcome() {
 		System.out.println("Welcome to Hotel Reservation Program");
 	}
 
-	public Hotel findCheapestHotel(String startDate, String endDate , List<Hotel> hotels) throws ParseException {
-		
+	// Find cheapest Hotel in Weekday
+	public Hotel findCheapestHotelInWeekday(String startDate, String endDate, List<Hotel> hotels)
+			throws ParseException {
 		Date start = sdf.parse(startDate);
 		Date end = sdf.parse(endDate);
-		
-		Hotel h = hotels.stream()
-				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
-				.findAny()
-				.get()
-				;				
-		 
-		 return h;
-	}
-
-	public Hotel findCheapestHotelInWeekday(String startDate, String endDate, List<Hotel> hotels)  throws ParseException{
-		Date start = sdf.parse(startDate);
-		Date end = sdf.parse(endDate);
-		Hotel h1 = hotels.stream()
-				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
-				.min(Comparator.comparingInt(Hotel::getWeekdayRate))
-				.get()
-				;
-		return h1;
-	}
-	public Hotel findCheapestHotelInWeekend(String startDate, String endDate, List<Hotel> hotels)  throws ParseException{
-		Date start = sdf.parse(startDate);
-		Date end = sdf.parse(endDate);
-		Hotel h1 = hotels.stream()
-				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
-				.min(Comparator.comparingInt(Hotel::getWeekendRate))
-				.get()
-				;
+		Hotel h1 = hotels.stream().filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()))
+				.min(Comparator.comparingInt(Hotel::getWeekdayRate)).get();
 		return h1;
 	}
 
-	public Hotel findCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels)   throws ParseException{
-		Hotel h1 = findCheapestHotelInWeekday(startDate,endDate,hotels);
-		Hotel h2 = findCheapestHotelInWeekend(startDate,endDate,hotels);
-		if(h1.getWeekdayRate() > h2.getWeekendRate()) 
+	// Find cheapest Hotel in Weekend
+	public Hotel findCheapestHotelInWeekend(String startDate, String endDate, List<Hotel> hotels)
+			throws ParseException {
+		Date start = sdf.parse(startDate);
+		Date end = sdf.parse(endDate);
+		Hotel h1 = hotels.stream().filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()))
+				.min(Comparator.comparingInt(Hotel::getWeekendRate)).get();
+		return h1;
+	}
+
+	// Find cheapest best rated Hotel
+	public Hotel findCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels)
+			throws ParseException {
+		Hotel h1 = findCheapestHotelInWeekday(startDate, endDate, hotels);
+		Hotel h2 = findCheapestHotelInWeekend(startDate, endDate, hotels);
+		if (h1.getWeekdayRate() > h2.getWeekendRate())
 			return h2;
-		else 
+		else
 			return h1;
-		
 	}
 
+	// Find best rated hotel
 	public Hotel findBestRatedHotel(String startDate, String endDate, List<Hotel> hotels) throws ParseException {
 		Date start = sdf.parse(startDate);
 		Date end = sdf.parse(endDate);
-		Hotel h1 = hotels.stream()
-				.filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()) )
-				.max(Comparator.comparingInt(Hotel::getRating))
-				.get()
-				;
+		Hotel h1 = hotels.stream().filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()))
+				.max(Comparator.comparingInt(Hotel::getRating)).get();
 		return h1;
 	}
 
-	public Hotel findRewardCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels) throws ParseException{
-		List<Hotel> list = hotels.stream()
-				.filter(n -> n.getCustomerType().equals("Reward"))
-				.collect(Collectors.toList())
-				;
-		Hotel h1 = findCheapestBestRatedHotel(startDate , endDate , list);
-
+	// Find Reward cheapest best rated hotel
+	public Hotel findRewardCheapestBestRatedHotel(String startDate, String endDate, List<Hotel> hotels)
+			throws ParseException {
+		List<Hotel> list = hotels.stream().filter(n -> n.getCustomerType().equals("Reward"))
+				.collect(Collectors.toList());
+		Hotel h1 = findCheapestBestRatedHotel(startDate, endDate, list);
 		return h1;
 	}
 
-	
 }
