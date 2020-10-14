@@ -91,4 +91,9 @@ public class Hotel {
 	public void setHotelName(String hotelName) {
 		this.hotelName = hotelName;
 	}
+	
+	@Override
+	public String toString() {
+		return getHotelName() + "  " + getWeekdayRate() + "  " + getWeekendRate() + "  " + getRating() ;
+	}
 }

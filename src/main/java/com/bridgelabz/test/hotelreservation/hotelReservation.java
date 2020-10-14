@@ -3,6 +3,7 @@ package com.bridgelabz.test.hotelreservation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.stream.Stream;
 public class hotelReservation {
 	// Initializing date format
 	SimpleDateFormat sdf = new SimpleDateFormat("ddMMMyyyy");
+	Calendar calStart = Calendar.getInstance();
+	Calendar calEnd = Calendar.getInstance();
 
 	// Printing welcome message
 	public void welcome() {
@@ -22,8 +25,13 @@ public class hotelReservation {
 	public Hotel findCheapestHotelInWeekday(String startDate, String endDate, List<Hotel> hotels)
 			throws ParseException {
 		Date start = sdf.parse(startDate);
+		calStart.setTime(start);
 		Date end = sdf.parse(endDate);
-		Hotel h1 = hotels.stream().filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()))
+		calStart.setTime(end);
+		List<Hotel> list = hotels.stream().filter(n -> start.after(n.getStartDate()) && end.before(n.getEndDate()))
+				.collect(Collectors.toList());
+		Hotel h1 = list.stream()
+				.filter(m -> calStart.get(Calendar.DAY_OF_WEEK) != 1 && calStart.get(Calendar.DAY_OF_WEEK) != 7)
 				.min(Comparator.comparingInt(Hotel::getWeekdayRate)).get();
 		return h1;
 	}
@@ -47,6 +55,7 @@ public class hotelReservation {
 			return h2;
 		else
 			return h1;
+
 	}
 
 	// Find best rated hotel
